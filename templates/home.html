@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Wishlist{% endblock %}
+
+{% block content %}
+<h1>Wishlist</h1>
+<p>Data source: wishlist.json</p>
+<p><a href="{{ url_for('add_wish') }}">Add new wish</a></p>
+
+{% if wishes %}
+<table>
+    <thead>
+    <tr>
+        <th>title</th>
+        <th>description</th>
+        <th>category</th>
+        <th>status</th>
+        <th>priority</th>
+        <th>image_url</th>
+        <th>link_url</th>
+        <th>timeframe</th>
+        <th>date_added</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for wish in wishes %}
+    <tr>
+        <td>{{ wish.title }}</td>
+        <td>{{ wish.description }}</td>
+        <td>{{ wish.category }}</td>
+        <td>{{ wish.status }}</td>
+        <td>{{ wish.priority }}</td>
+        <td>
+            {% if wish.image_url %}
+                <a href="{{ wish.image_url }}" target="_blank" rel="noopener noreferrer">image</a>
+            {% endif %}
+        </td>
+        <td>
+            {% if wish.link_url %}
+                <a href="{{ wish.link_url }}" target="_blank" rel="noopener noreferrer">link</a>
+            {% endif %}
+        </td>
+        <td>{{ wish.timeframe }}</td>
+        <td>{{ wish.date_added }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="empty">No wishes found.</p>
+{% endif %}
+{% endblock %}

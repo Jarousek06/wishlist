@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Add wish{% endblock %}
+
+{% block content %}
+<h1>Add new wish</h1>
+<p>Fill in the form and save a new item to wishlist.json.</p>
+
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+
+<form method="post">
+    <div class="form-grid">
+        <div>
+            <label for="title">title *</label>
+            <input id="title" name="title" required>
+        </div>
+
+        <div>
+            <label for="category">category</label>
+            <select id="category" name="category">
+                <option value="material">material</option>
+                <option value="experience">experience</option>
+                <option value="travel">travel</option>
+                <option value="other" selected>other</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="status">status</label>
+            <select id="status" name="status">
+                <option value="open" selected>open</option>
+                <option value="partially funded">partially funded</option>
+                <option value="fulfilled">fulfilled</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="priority">priority (1-5)</label>
+            <input id="priority" name="priority" type="number" min="1" max="5" value="3">
+        </div>
+
+        <div>
+            <label for="image_url">image_url</label>
+            <input id="image_url" name="image_url" type="url">
+        </div>
+
+        <div>
+            <label for="link_url">link_url</label>
+            <input id="link_url" name="link_url" type="url">
+        </div>
+
+        <div>
+            <label for="timeframe">timeframe</label>
+            <input id="timeframe" name="timeframe" placeholder="e.g. 2027-12-31">
+        </div>
+    </div>
+
+    <div style="margin-top: 12px;">
+        <label for="description">description</label>
+        <textarea id="description" name="description"></textarea>
+    </div>
+
+    <div class="actions">
+        <button type="submit">Save wish</button>
+        <a href="{{ url_for('home') }}">Back to table</a>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+[
+  {
+    "title": "foo",
+    "description": "lorem ipsum dolor sit amet",
+    "category": "other",
+    "status": "open",
+    "priority": 3,
+    "image_url": "",
+    "link_url": "",
+    "timeframe": "2027-12-31",
+    "date_added": "2026-03-04T00:00:00Z"
+  },
+  {
+    "title": "playstation 5",
+    "description": "i want it so bad",
+    "category": "other",
+    "status": "partially funded",
+    "priority": 3,
+    "image_url": "https://image.alza.cz/products/MSX0052/MSX0052.jpg?width=500&height=500",
+    "link_url": "https://www.alza.cz/gaming/playstation-5-slim-1tb-d8078676.htm?kampan=adwkoh_konzole-a-hry_pla_all_rh-top-products_top-products_c_1003763___MSX0052_745531900486_~178319255736~&gad_source=1&gad_campaignid=22433671598&gbraid=0AAAAAD2xsm6X11hSLTQJ0HXtH48J5friH&gclid=CjwKCAiAzZ_NBhAEEiwAMtqKy3UW218i77gkNrw5f1-aGmlrzaaqJodHkiTXzEjcNnQRSUzB3ZYbZRoCeSsQAvD_BwE",
+    "timeframe": "e.g 2027-12-31",
+    "date_added": "2026-03-04T13:46:04.697904+00:00"
+  },
+  {
+    "title": "kokos",
+    "description": "",
+    "category": "travel",
+    "status": "open",
+    "priority": 3,
+    "image_url": "",
+    "link_url": "",
+    "timeframe": "e.g 2027-12-31",
+    "date_added": "2026-03-04T14:00:45.718973+00:00"
+  }
+]
