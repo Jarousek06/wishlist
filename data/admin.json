@@ -1,17 +1,5 @@
 [
   {
-    "title": "foo",
-    "description": "lorem ipsum dolor sit amet",
-    "category": "other",
-    "status": "open",
-    "priority": 3,
-    "image_url": "",
-    "link_url": "",
-    "timeframe": "2027-12-31",
-    "date_added": "2026-03-04T00:00:00Z",
-    "id": "af943958-0dd0-44c1-89f8-60c369d738f4"
-  },
-  {
     "title": "playstation 5",
     "description": "i want it so bad",
     "category": "other",
@@ -34,5 +22,17 @@
     "timeframe": "e.g 2027-12-31",
     "date_added": "2026-03-04T14:00:45.718973+00:00",
     "id": "a2a3aca6-3eb5-4c9a-b16f-88c05bab5628"
+  },
+  {
+    "title": "jp",
+    "description": "jsme jarryn a budu bohaty",
+    "category": "material",
+    "status": "fulfilled",
+    "priority": 3,
+    "image_url": "",
+    "link_url": "",
+    "timeframe": "e.g 2027-12-31",
+    "id": "72d755d7-0baf-46d5-811c-c4b872d44f0b",
+    "date_added": "2026-03-11T13:20:22.984872+00:00"
   }
 ]

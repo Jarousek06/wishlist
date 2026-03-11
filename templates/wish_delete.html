@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Delete wish{% endblock %}
+
+{% block content %}
+<h1>Delete wish</h1>
+<p>You are about to delete this item:</p>
+
+<table style="width:auto;min-width:340px;">
+    <tr><th>Title</th><td>{{ wish.title }}</td></tr>
+    <tr><th>Category</th><td>{{ wish.category }}</td></tr>
+    <tr><th>Status</th><td>{{ wish.status }}</td></tr>
+    <tr><th>Priority</th><td>{{ wish.priority }}</td></tr>
+</table>
+
+<form method="post" class="actions">
+    <button type="submit" class="btn-sm btn-delete" style="padding:8px 14px;">Confirm delete</button>
+    <a href="{{ url_for('wish_detail', wish_id=wish.id) }}">Cancel</a>
+</form>
+{% endblock %}

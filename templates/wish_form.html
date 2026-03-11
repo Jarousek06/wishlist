@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action }} wish{% endblock %}
+
+{% block content %}
+<h1>{{ action }} wish</h1>
+<p><a href="{{ url_for('home') }}">← Back to list</a></p>
+
+<form method="post">
+    <div class="form-grid">
+        <div>
+            <label for="title">Title *</label>
+            <input id="title" name="title" required value="{{ wish.get('title', '') }}">
+        </div>
+
+        <div>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+                <option value="material"   {% if wish.get('category') == 'material'   %}selected{% endif %}>material</option>
+                <option value="experience" {% if wish.get('category') == 'experience' %}selected{% endif %}>experience</option>
+                <option value="travel"     {% if wish.get('category') == 'travel'     %}selected{% endif %}>travel</option>
+                <option value="other"      {% if wish.get('category','other') == 'other' %}selected{% endif %}>other</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="status">Status</label>
+            <select id="status" name="status">
+                <option value="open"             {% if wish.get('status','open') == 'open'             %}selected{% endif %}>open</option>
+                <option value="partially funded" {% if wish.get('status') == 'partially funded'        %}selected{% endif %}>partially funded</option>
+                <option value="fulfilled"        {% if wish.get('status') == 'fulfilled'               %}selected{% endif %}>fulfilled</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="priority">Priority (1–5)</label>
+            <input id="priority" name="priority" type="number" min="1" max="5" value="{{ wish.get('priority', 3) }}">
+        </div>
+
+        <div>
+            <label for="image_url">Image URL</label>
+            <input id="image_url" name="image_url" type="url" value="{{ wish.get('image_url', '') }}">
+        </div>
+
+        <div>
+            <label for="link_url">Link URL</label>
+            <input id="link_url" name="link_url" type="url" value="{{ wish.get('link_url', '') }}">
+        </div>
+
+        <div>
+            <label for="timeframe">Timeframe</label>
+            <input id="timeframe" name="timeframe" placeholder="e.g. 2027-12-31" value="{{ wish.get('timeframe', '') }}">
+        </div>
+    </div>
+
+    <div style="margin-top: 12px;">
+        <label for="description">Description</label>
+        <textarea id="description" name="description">{{ wish.get('description', '') }}</textarea>
+    </div>
+
+    <div class="actions">
+        <button type="submit">{{ action }} wish</button>
+        <a href="{{ url_for('home') }}">Cancel</a>
+    </div>
+</form>
+{% endblock %}

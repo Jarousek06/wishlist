@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ wish.title }}{% endblock %}
+
+{% block content %}
+<p><a href="{{ url_for('home') }}">← Back to list</a></p>
+
+<h1>{{ wish.title }}</h1>
+
+<table style="width:auto;min-width:340px;">
+    <tr><th>Category</th><td>{{ wish.category }}</td></tr>
+    <tr><th>Status</th><td>{{ wish.status }}</td></tr>
+    <tr><th>Priority</th><td>{{ wish.priority }}/5</td></tr>
+    <tr><th>Timeframe</th><td>{{ wish.timeframe or '—' }}</td></tr>
+    <tr><th>Date added</th><td>{{ wish.date_added[:10] if wish.date_added else '—' }}</td></tr>
+    {% if wish.link_url %}
+    <tr><th>Link</th><td><a href="{{ wish.link_url }}" target="_blank" rel="noopener noreferrer">{{ wish.link_url }}</a></td></tr>
+    {% endif %}
+</table>
+
+{% if wish.description %}
+<h3>Description</h3>
+<p>{{ wish.description }}</p>
+{% endif %}
+
+{% if wish.image_url %}
+<h3>Image</h3>
+<img src="{{ wish.image_url }}" alt="{{ wish.title }}" style="max-width:100%;max-height:340px;border-radius:8px;border:1px solid var(--border);">
+{% endif %}
+
+{% if session.username %}
+<div class="actions" style="margin-top:20px;">
+    <a href="{{ url_for('edit_wish', wish_id=wish.id) }}" class="btn-sm btn-edit" style="padding:8px 14px;">Edit</a>
+    <a href="{{ url_for('delete_wish', wish_id=wish.id) }}" class="btn-sm btn-delete" style="padding:8px 14px;">Delete</a>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+<h1>Log in</h1>
+<p>
+    This app uses a single preconfigured account (no registration).
+    For local development, default credentials are <strong>admin / admin</strong>,
+    unless overridden by environment variables.
+</p>
+<p style="font-size:0.9rem;color:var(--muted);">
+    Use <strong>WISHLIST_USER</strong> and either <strong>WISHLIST_PASSWORD</strong>
+    or <strong>WISHLIST_PASSWORD_HASH</strong> to change login.
+</p>
+
+<form method="post" style="max-width:360px;">
+    <input type="hidden" name="next" value="{{ next }}">
+    <div style="margin-bottom:12px;">
+        <label for="username">Username</label>
+        <input id="username" name="username" required autocomplete="username">
+    </div>
+    <div style="margin-bottom:12px;">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required autocomplete="current-password">
+    </div>
+    <div class="actions">
+        <button type="submit">Log in</button>
+    </div>
+</form>
+{% endblock %}

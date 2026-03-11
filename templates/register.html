@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<h1>Register</h1>
+
+<form method="post" style="max-width:360px;">
+    <div style="margin-bottom:12px;">
+        <label for="username">Username</label>
+        <input id="username" name="username" required autocomplete="username">
+    </div>
+    <div style="margin-bottom:12px;">
+        <label for="password">Password <span style="font-weight:400;color:var(--muted)">(min. 6 characters)</span></label>
+        <input id="password" name="password" type="password" required autocomplete="new-password">
+    </div>
+    <div style="margin-bottom:12px;">
+        <label for="password2">Confirm password</label>
+        <input id="password2" name="password2" type="password" required autocomplete="new-password">
+    </div>
+    <div class="actions">
+        <button type="submit">Register</button>
+        <a href="{{ url_for('login') }}">Already have an account?</a>
+    </div>
+</form>
+{% endblock %}

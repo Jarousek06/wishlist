@@ -4,49 +4,126 @@
 
 {% block content %}
 <h1>Wishlist</h1>
-<p>Data source: wishlist.json</p>
-<p><a href="{{ url_for('add_wish') }}">Add new wish</a></p>
+
+{% if wishes is none %}
+<p>Please <a href="{{ url_for('login') }}">log in</a> to view and manage your wishlist.</p>
+{% else %}
+<form method="get" action="/">
+    <div class="filter-bar">
+        <div>
+            <label>Search</label>
+            <input name="q" value="{{ q }}" placeholder="title or description">
+        </div>
+        <div>
+            <label>Category</label>
+            <select name="category">
+                <option value="">All</option>
+                {% for c in categories %}
+                <option value="{{ c }}" {% if filter_category == c %}selected{% endif %}>{{ c }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Status</label>
+            <select name="status">
+                <option value="">All</option>
+                {% for s in statuses %}
+                <option value="{{ s }}" {% if filter_status == s %}selected{% endif %}>{{ s }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Priority</label>
+            <select name="priority">
+                <option value="">All</option>
+                {% for p in range(1, 6) %}
+                <option value="{{ p }}" {% if filter_priority == p|string %}selected{% endif %}>{{ p }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Sort by</label>
+            <select name="sort">
+                <option value="date_added" {% if sort_by == 'date_added' %}selected{% endif %}>Date added</option>
+                <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Title</option>
+                <option value="category" {% if sort_by == 'category' %}selected{% endif %}>Category</option>
+                <option value="status" {% if sort_by == 'status' %}selected{% endif %}>Status</option>
+                <option value="priority" {% if sort_by == 'priority' %}selected{% endif %}>Priority</option>
+            </select>
+        </div>
+        <div>
+            <label>Direction</label>
+            <select name="dir">
+                <option value="desc" {% if sort_dir == 'desc' %}selected{% endif %}>Desc</option>
+                <option value="asc" {% if sort_dir == 'asc' %}selected{% endif %}>Asc</option>
+            </select>
+        </div>
+        <div style="display:flex;gap:6px;align-items:flex-end;">
+            <button type="submit">Apply</button>
+            <a href="/" class="btn-sm btn-view" style="line-height:2;">Reset</a>
+        </div>
+    </div>
+</form>
 
 {% if wishes %}
+<div style="overflow-x:auto;">
 <table>
     <thead>
-    <tr>
-        <th>title</th>
-        <th>description</th>
-        <th>category</th>
-        <th>status</th>
-        <th>priority</th>
-        <th>image_url</th>
-        <th>link_url</th>
-        <th>timeframe</th>
-        <th>date_added</th>
-    </tr>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Image</th>
+            <th>Link</th>
+            <th>Timeframe</th>
+            <th>Date added</th>
+            <th>Detail</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
     </thead>
     <tbody>
-    {% for wish in wishes %}
-    <tr>
-        <td>{{ wish.title }}</td>
-        <td>{{ wish.description }}</td>
-        <td>{{ wish.category }}</td>
-        <td>{{ wish.status }}</td>
-        <td>{{ wish.priority }}</td>
-        <td>
-            {% if wish.image_url %}
+        {% for wish in wishes %}
+        <tr>
+            <td>{{ wish.title }}</td>
+            <td>{{ wish.description or '-' }}</td>
+            <td>{{ wish.category }}</td>
+            <td>{{ wish.status }}</td>
+            <td>{{ wish.priority }}</td>
+            <td>
+                {% if wish.image_url %}
                 <a href="{{ wish.image_url }}" target="_blank" rel="noopener noreferrer">image</a>
-            {% endif %}
-        </td>
-        <td>
-            {% if wish.link_url %}
+                {% else %}
+                -
+                {% endif %}
+            </td>
+            <td>
+                {% if wish.link_url %}
                 <a href="{{ wish.link_url }}" target="_blank" rel="noopener noreferrer">link</a>
-            {% endif %}
-        </td>
-        <td>{{ wish.timeframe }}</td>
-        <td>{{ wish.date_added }}</td>
-    </tr>
-    {% endfor %}
+                {% else %}
+                -
+                {% endif %}
+            </td>
+            <td>{{ wish.timeframe or '-' }}</td>
+            <td>{{ wish.date_added }}</td>
+            <td>
+                <a class="btn-sm btn-view" href="{{ url_for('wish_detail', wish_id=wish.id) }}">Detail</a>
+            </td>
+            <td>
+                <a class="btn-sm btn-edit" href="{{ url_for('edit_wish', wish_id=wish.id) }}">Edit</a>
+            </td>
+            <td>
+                <a class="btn-sm btn-delete" href="{{ url_for('delete_wish', wish_id=wish.id) }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
+</div>
 {% else %}
 <p class="empty">No wishes found.</p>
+{% endif %}
 {% endif %}
 {% endblock %}

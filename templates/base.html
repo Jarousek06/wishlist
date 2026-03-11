@@ -125,11 +125,101 @@
             background: #fee2e2;
             color: #991b1b;
         }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1d4ed8;
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 0;
+        }
+        nav a {
+            color: #fff;
+            font-weight: 600;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .nav-right {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        .nav-user {
+            opacity: 0.85;
+        }
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: flex-end;
+            margin-bottom: 12px;
+        }
+        .filter-bar label {
+            font-size: 0.8rem;
+            margin-bottom: 3px;
+        }
+        .filter-bar input,
+        .filter-bar select {
+            width: auto;
+            min-width: 120px;
+        }
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.85rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-edit {
+            background: #f59e0b;
+            color: #fff;
+        }
+        .btn-delete {
+            background: #ef4444;
+            color: #fff;
+        }
+        .btn-view {
+            background: #6b7280;
+            color: #fff;
+        }
+        .sort-link {
+            color: #1d4ed8;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .badge-open { background: #dbeafe; color: #1e40af; }
+        .badge-fulfilled { background: #dcfce7; color: #166534; }
+        .badge-partial { background: #fef9c3; color: #854d0e; }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="card">
+    <nav>
+        <a href="/">&#10025; Wishlist</a>
+        <div class="nav-right">
+            {% if session.username %}
+                <span class="nav-user">{{ session.username }}</span>
+                <a href="{{ url_for('add_wish') }}">+ Add wish</a>
+                <a href="{{ url_for('logout') }}">Log out</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Log in</a>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="card" style="border-radius: 0 0 10px 10px; border-top: none;">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <ul class="flash-list">
