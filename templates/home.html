@@ -5,9 +5,6 @@
 {% block content %}
 <h1>Wishlist</h1>
 
-{% if wishes is none %}
-<p>Please <a href="{{ url_for('login') }}">log in</a> to view and manage your wishlist.</p>
-{% else %}
 <form method="get" action="/">
     <div class="filter-bar">
         <div>
@@ -80,8 +77,10 @@
             <th>Timeframe</th>
             <th>Date added</th>
             <th>Detail</th>
+            {% if session.username %}
             <th>Edit</th>
             <th>Delete</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -111,12 +110,14 @@
             <td>
                 <a class="btn-sm btn-view" href="{{ url_for('wish_detail', wish_id=wish.id) }}">Detail</a>
             </td>
+            {% if session.username %}
             <td>
                 <a class="btn-sm btn-edit" href="{{ url_for('edit_wish', wish_id=wish.id) }}">Edit</a>
             </td>
             <td>
                 <a class="btn-sm btn-delete" href="{{ url_for('delete_wish', wish_id=wish.id) }}">Delete</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>
@@ -124,6 +125,5 @@
 </div>
 {% else %}
 <p class="empty">No wishes found.</p>
-{% endif %}
 {% endif %}
 {% endblock %}

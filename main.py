@@ -147,10 +147,8 @@ def logout():
 
 @app.route("/")
 def home():
-    username = session.get("username")
-    if not username:
-        return render_template("home.html", wishes=None)
-
+    # Always load wishlist from main user, regardless of login status
+    username = WISHLIST_USER
     wishes = load_wishlist(username)
 
     q = request.args.get("q", "").strip().lower()
@@ -220,9 +218,9 @@ def add_wish():
 
 
 @app.route("/wish/<wish_id>")
-@login_required
 def wish_detail(wish_id):
-    username = session["username"]
+    # Public view - allow anyone to view wish details
+    username = WISHLIST_USER
     wishes = load_wishlist(username)
     wish = next((w for w in wishes if w.get("id") == wish_id), None)
     if wish is None:
